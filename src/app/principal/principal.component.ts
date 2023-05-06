@@ -92,6 +92,48 @@ export class PrincipalComponent {
       });
   }
 
+  //método para remover clientes
+  remover(): void {
+
+    this.servico.remover(this.cliente.codigo)
+      .subscribe(retorno => {
+
+        //Obter posição do vetor onde esta o cliente
+        let posicao = this.clientes.findIndex(obj => {
+          return obj.codigo == this.cliente.codigo;
+        });
+
+        //Remover cliente do vetor
+        this.clientes.splice(posicao, 1);
+
+        //Limpar formulário
+        this.cliente = new Cliente();
+
+        //Visibilidade dos botões
+        this.btnCadastro = true;
+
+        //Visibilidade da tabela
+        this.tabela = true;
+
+        //Mensagem
+        alert('Cliente removido com sucesso!');
+
+      });
+  }
+
+  //Método para cancelar
+     cancelar():void {
+
+       //Limpar formulário
+       this.cliente = new Cliente();
+
+       //Visibilidade dos botões
+       this.btnCadastro = true;
+
+       //Visibilidade da tabela
+       this.tabela = true;
+     }
+      
 
 
 
